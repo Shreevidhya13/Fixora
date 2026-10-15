@@ -1,0 +1,147 @@
+.fixora-header {
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: auto;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.fixora-logo {
+  color: #2563eb;
+  font-size: 25px;
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-link {
+  color: #374151;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 10px 12px;
+  border-radius: 8px;
+  transition: 0.2s ease;
+  white-space: nowrap;
+}
+
+.nav-link:hover {
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.login-link {
+  background: #2563eb;
+  color: #ffffff;
+}
+
+.login-link:hover {
+  background: #1d4ed8;
+  color: #ffffff;
+}
+
+@media (max-width: 600px) {
+  .header-container {
+    flex-direction: column;
+    padding: 14px 10px;
+  }
+
+  .header-nav {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .nav-link {
+    padding: 8px;
+    font-size: 13px;
+  }
+}
+
+.logout-button {
+  border: none;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  color: #6256d9;
+}
+
+/* Profile icon and dropdown */
+.profile-container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+}
+
+.profile-button {
+  width: 40px;
+  height: 40px;
+  border: 1px solid #e0e0e0;
+  border-radius: 50%;
+  background: #f5f3ff;
+  font-size: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-button:hover {
+  background: #e9e4ff;
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 170px;
+  padding: 10px;
+  background: #ffffff;
+  border: 1px solid #eeeeee;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 1000;
+}
+
+.profile-label {
+  margin: 5px 8px 10px;
+  color: #777777;
+  font-size: 13px;
+}
+
+.profile-logout {
+  width: 100%;
+  padding: 10px 8px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #b42318;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+}
+
+.profile-logout:hover {
+  background: #fff0ef;
+}
+

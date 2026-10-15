@@ -1,0 +1,180 @@
+
+.maintenance-page {
+  min-height: 100vh;
+  padding: 45px 20px 70px;
+  background: #f5f7fb;
+}
+
+.maintenance-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.maintenance-heading {
+  margin-bottom: 30px;
+}
+
+.maintenance-eyebrow {
+  color: #6256d9;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 1.8px;
+}
+
+.maintenance-heading h1 {
+  margin: 12px 0;
+  color: #172033;
+  font-size: clamp(28px, 4vw, 40px);
+}
+
+.maintenance-heading > p:last-child,
+.maintenance-section-heading p {
+  color: #687386;
+  line-height: 1.7;
+}
+
+.maintenance-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 38px;
+}
+
+.maintenance-summary-card {
+  padding: 23px;
+  background: white;
+  border: 1px solid #e7eaf2;
+  border-radius: 15px;
+}
+
+.maintenance-summary-card span {
+  color: #687386;
+  font-size: 13px;
+}
+
+.maintenance-summary-card h2 {
+  margin: 12px 0 0;
+  color: #6256d9;
+  font-size: 30px;
+}
+
+.maintenance-section-heading {
+  margin-bottom: 20px;
+}
+
+.maintenance-section-heading h2 {
+  color: #172033;
+  font-size: 23px;
+}
+
+.maintenance-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.maintenance-card {
+  padding: 24px;
+  background: white;
+  border: 1px solid #e7eaf2;
+  border-radius: 16px;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.maintenance-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 28px rgba(31, 41, 70, 0.07);
+}
+
+.maintenance-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.maintenance-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 13px;
+  background: #f0eeff;
+  font-size: 24px;
+}
+
+.maintenance-status {
+  padding: 7px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.maintenance-status.needs-attention {
+  background: #ffe7e7;
+  color: #b42323;
+}
+
+.maintenance-status.scheduled {
+  background: #fff3d8;
+  color: #946200;
+}
+
+.maintenance-status.up-to-date {
+  background: #dcf8e8;
+  color: #197344;
+}
+
+.maintenance-card h3 {
+  margin: 20px 0 10px;
+  color: #172033;
+  font-size: 18px;
+}
+
+.maintenance-card > p {
+  margin-bottom: 0;
+  color: #687386;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.maintenance-note {
+  margin-top: 25px;
+  color: #687386;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+@media (max-width: 800px) {
+  .maintenance-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 550px) {
+  .maintenance-page {
+    padding: 30px 14px 50px;
+  }
+
+  .maintenance-summary {
+    gap: 10px;
+  }
+
+  .maintenance-summary-card {
+    padding: 15px;
+  }
+
+  .maintenance-summary-card span {
+    font-size: 12px;
+  }
+
+  .maintenance-summary-card h2 {
+    font-size: 25px;
+  }
+
+  .maintenance-grid {
+    grid-template-columns: 1fr;
+  }
+}

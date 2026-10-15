@@ -1,0 +1,17 @@
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+client/node_modules/
+server/node_modules/
+
+# Uploaded files and temporary packages
+server/uploads/
+server/multer-test.tgz
+
+# Build files
+client/dist/
+server/dist/

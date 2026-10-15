@@ -1,0 +1,130 @@
+
+.issue-page {
+  min-height: 100vh;
+  padding: 55px 20px 70px;
+  background: #f5f7fb;
+}
+
+.issue-container {
+  width: 100%;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.issue-heading {
+  margin-bottom: 30px;
+}
+
+.issue-eyebrow {
+  color: #6256d9;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.issue-heading h1 {
+  margin: 12px 0;
+  color: #172033;
+  font-size: clamp(30px, 5vw, 42px);
+}
+
+.issue-heading > p:last-child {
+  color: #687386;
+  line-height: 1.7;
+}
+
+.issue-form {
+  padding: 32px;
+  background: #ffffff;
+  border: 1px solid #e7eaf2;
+  border-radius: 20px;
+  box-shadow: 0 12px 40px rgba(31, 41, 70, 0.06);
+}
+
+.issue-field {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  margin-bottom: 22px;
+}
+
+.issue-field label {
+  color: #283247;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.issue-field input,
+.issue-field select,
+.issue-field textarea {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid #dce1eb;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #202a3d;
+  font: inherit;
+  font-size: 14px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.issue-field input:focus,
+.issue-field select:focus,
+.issue-field textarea:focus {
+  border-color: #7165e8;
+  box-shadow: 0 0 0 3px rgba(113, 101, 232, 0.12);
+}
+
+.issue-field textarea {
+  resize: vertical;
+}
+
+.selected-photo {
+  margin: 0;
+  color: #6256d9;
+  font-size: 13px;
+}
+.issue-reset,
+
+.issue-submit {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  gap: 15px; 
+  border-radius: 10px;
+  background: #6256d9;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.issue-reset:hover,
+.issue-submit:hover {
+  background: #4e43bd;
+}
+
+
+.issue-message {
+  padding: 12px;
+  margin-bottom: 18px;
+  border-radius: 8px;
+  background: #eeecff;
+  color: #4940a5;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+@media (max-width: 600px) {
+  .issue-page {
+    padding: 35px 14px;
+  }
+
+  .issue-form {
+    padding: 22px 18px;
+  }
+ 
+
+}

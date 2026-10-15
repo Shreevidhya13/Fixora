@@ -1,0 +1,97 @@
+.fixora-header {
+  width: 100%;
+  background-color: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.fixora-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 26px;
+  font-weight: 800;
+  color: #2563eb;
+  text-decoration: none;
+  letter-spacing: -0.5px;
+}
+
+.logo-icon {
+  font-size: 28px;
+}
+
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #374151;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 10px 16px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.nav-link:hover {
+  background-color: #eff6ff;
+  color: #2563eb;
+}
+
+.report-link {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+.report-link:hover {
+  background-color: #1d4ed8;
+  color: #ffffff;
+}
+
+@media (max-width: 480px) {
+  .header-container {
+    padding: 14px 12px;
+    gap: 8px;
+  }
+
+  .fixora-logo {
+    font-size: 22px;
+  }
+
+  .header-nav {
+    gap: 4px;
+  }
+
+  .nav-link {
+    font-size: 13px;
+    padding: 9px 10px;
+  }
+
+}
+.feature-link {
+  display: inline-block;
+  margin-top: 12px;
+  color: #6256d9;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.feature-link:hover {
+  text-decoration: underline;
+}
