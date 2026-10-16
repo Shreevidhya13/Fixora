@@ -4,22 +4,40 @@ const Issue = require("../models/Issue");
 const User = require("../models/User");
 const sendIssueNotification = require("../utils/sendIssueNotification");
 
-// Submit a new maintenance issue
+
 async function createIssue(req, res) {
   try {
     const { title, description, category, location, priority } = req.body;
 
     if (
-      !title?.trim() ||
-      !description?.trim() ||
-      !category?.trim() ||
-      !location?.trim()
+      typeof title !== "string" ||
+      typeof description !== "string" ||
+      typeof category !== "string" ||
+      typeof location !== "string"
     ) {
       return res.status(400).json({
-        message:
-          "Please provide the title, description, category, and location.",
+        message: "Please provide valid text for all required issue fields.",
       });
     }
+
+    // Keep your existing required-field validation here.
+
+// Submit a new maintenance issue
+// async function createIssue(req, res) {
+//   try {
+//     const { title, description, category, location, priority } = req.body;
+
+//     if (
+//       !title?.trim() ||
+//       !description?.trim() ||
+//       !category?.trim() ||
+//       !location?.trim()
+//     ) {
+//       return res.status(400).json({
+//         message:
+//           "Please provide the title, description, category, and location.",
+//       });
+//     }
 
     if (
       priority !== undefined &&

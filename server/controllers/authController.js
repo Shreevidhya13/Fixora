@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const User = require("../models/User");
 
+// Create JWT token
 function createToken(user) {
   if (!process.env.JWT_SECRET) {
     throw new Error("JWT_SECRET is missing from the .env file");
@@ -23,13 +24,14 @@ async function register(req, res) {
   try {
     const { name, email, phone, password } = req.body;
 
+    // Validate required fields
     if (!name?.trim() || !email?.trim() || !password) {
       return res.status(400).json({
         message: "Name, email, and password are required.",
       });
     }
 
-    if (password.length < 6) {
+    if (typeof password !== "string" || password.length < 6) {
       return res.status(400).json({
         message: "Password must contain at least 6 characters.",
       });
@@ -37,6 +39,7 @@ async function register(req, res) {
 
     const normalizedEmail = email.trim().toLowerCase();
 
+    // Check whether the email already exists
     const existingUser = await User.findOne({
       email: normalizedEmail,
     });
@@ -47,15 +50,17 @@ async function register(req, res) {
       });
     }
 
+    // Hash the password before saving
     const hashedPassword = await bcrypt.hash(password, 12);
 
+    // Public registration always creates a resident
     const user = await User.create({
-  name: name.trim(),
-  email: normalizedEmail,
-  phone: phone?.trim() || "",
-  password: hashedPassword,
-  role: "resident",
-});
+      name: name.trim(),
+      email: normalizedEmail,
+      phone: typeof phone === "string" ? phone.trim() : "",
+      password: hashedPassword,
+      role: "resident",
+    });
 
     const token = createToken(user);
 
@@ -66,6 +71,7 @@ async function register(req, res) {
         id: user._id,
         name: user.name,
         email: user.email,
+        phone: user.phone,
         role: user.role,
       },
     });
@@ -89,12 +95,19 @@ async function login(req, res) {
   try {
     const { email, password } = req.body;
 
-    if (!email?.trim() || !password) {
+    // Validate required fields
+    if (
+      typeof email !== "string" ||
+      !email.trim() ||
+      typeof password !== "string" ||
+      !password
+    ) {
       return res.status(400).json({
         message: "Email and password are required.",
       });
     }
 
+    // Find user and retrieve the hidden password field
     const user = await User.findOne({
       email: email.trim().toLowerCase(),
     }).select("+password");
@@ -105,6 +118,7 @@ async function login(req, res) {
       });
     }
 
+    // Compare entered password with the hashed password
     const passwordMatches = await bcrypt.compare(
       password,
       user.password
@@ -125,6 +139,7 @@ async function login(req, res) {
         id: user._id,
         name: user.name,
         email: user.email,
+        phone: user.phone,
         role: user.role,
       },
     });

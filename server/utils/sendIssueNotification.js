@@ -8,21 +8,27 @@ async function sendIssueNotification(issue, resident) {
     ADMIN_EMAIL,
   } = process.env;
 
-  if (!GMAIL_USER || !GMAIL_APP_PASSWORD || !ADMIN_EMAIL) {
-    throw new Error("Gmail notification settings are missing from .env");
+  const gmailUser = GMAIL_USER?.trim();
+  const adminEmail = ADMIN_EMAIL?.trim();
+  const appPassword = GMAIL_APP_PASSWORD?.replace(/\s/g, "");
+
+  if (!gmailUser || !appPassword || !adminEmail) {
+    throw new Error(
+      "Gmail notification settings are missing from .env"
+    );
   }
 
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: GMAIL_USER,
-      pass: GMAIL_APP_PASSWORD.replace(/\s/g, ""),
+      user: gmailUser,
+      pass: appPassword,
     },
   });
 
   const mailOptions = {
-    from: `"Fixora Notifications" <${GMAIL_USER}>`,
-    to: ADMIN_EMAIL,
+    from: `"Fixora Notifications" <${gmailUser}>`,
+    to: adminEmail,
     subject: `New Fixora Issue: ${issue.title}`,
     text: `
 Hello Admin,
