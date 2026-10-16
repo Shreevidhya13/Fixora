@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const Issue = require("../models/Issue");
 const User = require("../models/User");
 const sendIssueNotification = require("../utils/sendIssueNotification");
-
+const sendStatusUpdateNotification = require("../utils/sendStatusUpdateNotification");
 
 async function createIssue(req, res) {
   try {
@@ -19,25 +19,6 @@ async function createIssue(req, res) {
         message: "Please provide valid text for all required issue fields.",
       });
     }
-
-    // Keep your existing required-field validation here.
-
-// Submit a new maintenance issue
-// async function createIssue(req, res) {
-//   try {
-//     const { title, description, category, location, priority } = req.body;
-
-//     if (
-//       !title?.trim() ||
-//       !description?.trim() ||
-//       !category?.trim() ||
-//       !location?.trim()
-//     ) {
-//       return res.status(400).json({
-//         message:
-//           "Please provide the title, description, category, and location.",
-//       });
-//     }
 
     if (
       priority !== undefined &&
@@ -149,10 +130,10 @@ async function updateIssueStatus(req, res) {
       });
     }
 
-    const issue = await Issue.findByIdAndUpdate(
-      req.params.id,
-      { status },
-      { new: true, runValidators: true }
+    // Find the issue and its resident
+    const issue = await Issue.findById(req.params.id).populate(
+      "reportedBy",
+      "name email"
     );
 
     if (!issue) {
@@ -161,8 +142,33 @@ async function updateIssueStatus(req, res) {
       });
     }
 
+    const previousStatus = issue.status;
+
+    // Save the status before attempting to send an email
+    issue.status = status;
+    await issue.save();
+
+    // Send email only when the status actually changes
+    if (previousStatus !== status) {
+      try {
+        await sendStatusUpdateNotification(
+          issue,
+          issue.reportedBy,
+          previousStatus
+        );
+      } catch (emailError) {
+        console.error(
+          "Status updated, but resident email notification failed:",
+          emailError.message
+        );
+      }
+    }
+
     return res.status(200).json({
-      message: "Issue status updated successfully.",
+      message:
+        previousStatus === status
+          ? "Issue status is unchanged."
+          : "Issue status updated successfully. Resident notification attempted.",
       issue,
     });
   } catch (error) {
@@ -180,3 +186,53 @@ module.exports = {
   getAllIssues,
   updateIssueStatus,
 };
+// // Update issue status (admin only)
+// async function updateIssueStatus(req, res) {
+//   try {
+//     const { status } = req.body;
+
+//     if (!mongoose.isValidObjectId(req.params.id)) {
+//       return res.status(400).json({
+//         message: "Invalid issue ID.",
+//       });
+//     }
+
+//     const allowedStatuses = [
+//       "Submitted",
+//       "In Progress",
+//       "Resolved",
+//       "Rejected",
+//     ];
+
+//     if (!allowedStatuses.includes(status)) {
+//       return res.status(400).json({
+//         message: "Please provide a valid issue status.",
+//       });
+//     }
+
+//     const issue = await Issue.findByIdAndUpdate(
+//       req.params.id,
+//       { status },
+//       { new: true, runValidators: true }
+//     );
+
+//     if (!issue) {
+//       return res.status(404).json({
+//         message: "Issue not found.",
+//       });
+//     }
+
+//     return res.status(200).json({
+//       message: "Issue status updated successfully.",
+//       issue,
+//     });
+//   } catch (error) {
+//     console.error("Update issue status error:", error.message);
+
+//     return res.status(500).json({
+//       message: "Unable to update issue status.",
+//     });
+//   }
+// }
+
+
